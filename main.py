@@ -20,11 +20,8 @@ import logging
 import uvicorn
 import os
 
-# os.environ['OPENAI_API_KEY'] = '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'
-# OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-
 app = FastAPI()
-model = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0.7)
+model = ChatOpenAI(model="gpt-4", temperature=0.7)
 
 app.add_middleware(
     CORSMiddleware,
@@ -213,5 +210,5 @@ async def get_documents(docx: DocumentRequest):
 
     ### combining the abnormal and other readings
     client = OpenAI()
-    response_3 = client.chat.completions.create(model="gpt-3.5-turbo-1106", messages=messages_2)
+    response_3 = client.chat.completions.create(model="gpt-4", messages=messages_2)
     return response_3.choices[0].message

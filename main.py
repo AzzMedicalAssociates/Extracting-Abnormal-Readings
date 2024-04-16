@@ -21,7 +21,7 @@ import uvicorn
 import os
 
 app = FastAPI()
-model = ChatOpenAI(model="gpt-4", temperature=0.7)
+model = ChatOpenAI(model="gpt-4", temperature=0)
 
 app.add_middleware(
     CORSMiddleware,
@@ -107,6 +107,9 @@ async def get_documents(docx: DocumentRequest):
         1) Only return the abnormal reading values in your ``final response``.
         2) Do not return any other details or values in your ``final response``.
         3) Make sure nothing is missed in your ``final response``.
+        4) Do not add any extra information except abnormal readings in your ``final response``.
+        5) Write the abnormal reading value and simply write its high or low.
+        6) Do not add the first line like `` Patient has several abnormal lab results ``.
 
         Let's follow all the above mentioned steps.
 

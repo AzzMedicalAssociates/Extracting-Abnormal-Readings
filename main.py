@@ -110,6 +110,7 @@ async def get_documents(docx: DocumentRequest):
         4) Do not add any extra information except abnormal readings in your ``final response``.
         5) Write the abnormal reading value and simply write its high or low.
         6) Do not add the first line like `` Patient has several abnormal lab results ``.
+        
 
         Let's follow all the above mentioned steps.
 
@@ -119,8 +120,6 @@ async def get_documents(docx: DocumentRequest):
 
     schema = {
         "properties": {
-            "patient_name": {"type": "string"},
-            "Write the date on which the lab were conducted.": {"type": "string"},
             "HbA1c": {"type": "string"},
             "Albumin": {"type": "string"},
             "Creatinine": {"type": "string"},
@@ -152,7 +151,6 @@ async def get_documents(docx: DocumentRequest):
             "Pap_Smear": {"type": "string"},
             "Testosterone_Total": {"type": "string"}
         },
-        "required": ["Write the date on which the lab were conducted."],
     }
 
     # Chain which is used to extract schema
@@ -203,8 +201,7 @@ async def get_documents(docx: DocumentRequest):
         },
         {
             "role": "assistant",
-            "content": "The lab results indicate that the patient, Elizabeth Mitchell, has a few values that are \
-                   outside the normal range. These include a low albumin level (3.7 g/dL). Other normal readings are albumin \
+            "content": "high white blood cells at 18.3 x10E3/uL, high red blood cells at 14.44 x10E6/uL, high hemoglobin at 113.7 g/dL, high hematocrit at 140.9%, high MCV at 192 fL, high MCH at 130.9 pg, low MCHC at 33.5 g/dL, high RDW at 112.9%, and  high platelets at 1304 x10E3/uL. \n\nFurthermore, she has high neutrophils at 70%, low lymphs at 24%, high monocytes at 15%, high eosinophils at 10%, high basophils at 11%, and high absolute neutrophils at 15.8 x10E3/uL. Further, the glucose level is also high at 194 mg/dL, and high creatinine at 10.83 mg/dL, low sodium at 142 mmol/L, low potassium at 4.5 mmol/L, and high chloride at 106 mmol/L. Her total carbon dioxide level is low at 20 mmol/L, the calcium level is high at 9.3 mg/dL, the total protein is low at 6.8 g/dL, and the albumin is also low at 4.1 g/dL. Other normal readings are albumin \
                    4.5 and GFR 69"
         },
         {

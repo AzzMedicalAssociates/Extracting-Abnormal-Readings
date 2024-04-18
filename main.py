@@ -43,7 +43,6 @@ async def read_root():
     
 @app.post("/documents")
 async def get_documents(docx: DocumentRequest):
-    
     docs = docx.text
 
     #### Textsplitter takes itrable therefore we need to split the text into two parts ####
@@ -66,7 +65,7 @@ async def get_documents(docx: DocumentRequest):
     # splitting document into chunks
     documents = RecursiveCharacterTextSplitter(
         chunk_size=3000, chunk_overlap=300
-    ).split_documents(docs_) #because now we are gettings docs so need to extract the text from it
+    ).split_documents(docs_)  # because now we are gettings docs so need to extract the text from it
 
     # defining the vector store, creating embeddings
     vector = FAISS.from_documents(documents, OpenAIEmbeddings())
@@ -110,13 +109,11 @@ async def get_documents(docx: DocumentRequest):
         4) Do not add any extra information except abnormal readings in your ``final response``.
         5) Write the abnormal reading value and simply write its high or low.
         6) Do not add the first line like `` Patient has several abnormal lab results ``.
-        
 
         Let's follow all the above mentioned steps.
 
         Question: {question}
         """
-
 
     schema = {
         "properties": {
@@ -151,6 +148,7 @@ async def get_documents(docx: DocumentRequest):
             "Pap_Smear": {"type": "string"},
             "Testosterone_Total": {"type": "string"}
         },
+
     }
 
     # Chain which is used to extract schema
@@ -158,8 +156,6 @@ async def get_documents(docx: DocumentRequest):
     response_1 = chain.run(docs)
     # return response_1.choices[0].message
     # return response_1
-
-
 
     prompt = PromptTemplate.from_template(
         template=prompt_string
@@ -177,7 +173,7 @@ async def get_documents(docx: DocumentRequest):
     response_2 = chain.invoke("Extract only the abnormal readings from the provided context.")
 
     prompt2 = f"""
-                You are a medical assistant. Your job is to write the patient labs readings in the form of paragraph. You have to remove the duplicate reading.
+                You are a medical assistant. Your job is to write the patient labs readings. You have to remove the duplicate reading.
                 The abnormal readings are delimited by triple backticks. 
                 '''{response_2}'''
                 And the other readings are delimited by triple hashtags.
@@ -189,14 +185,13 @@ async def get_documents(docx: DocumentRequest):
         {
             "role": "system",
             "content": f"""    
-               You are a medical assistant. Your job is to rearrange the patient labs readings. You have to remove the duplicate reading.
-               The output should be in the form of paragraph.
+               You are a medical assistant. Your job is to rearrange the patient labs readings only. You have to remove the duplicate reading.
 
            """
         },
         {
             "role": "user",
-            "content": "Remove the duplicates lab results. Firt write the abnormal readings and than write the other readings"
+            "content": "Remove the duplicates lab results. Firt write the abnormal readings and then write the other readings"
 
         },
         {

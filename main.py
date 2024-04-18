@@ -201,8 +201,7 @@ async def get_documents(docx: DocumentRequest):
         },
         {
             "role": "assistant",
-            "content": "high white blood cells at 18.3 x10E3/uL, high red blood cells at 14.44 x10E6/uL, high hemoglobin at 113.7 g/dL, high hematocrit at 140.9%, high MCV at 192 fL, high MCH at 130.9 pg, low MCHC at 33.5 g/dL, high RDW at 112.9%, and  high platelets at 1304 x10E3/uL. \n\nFurthermore, she has high neutrophils at 70%, low lymphs at 24%, high monocytes at 15%, high eosinophils at 10%, high basophils at 11%, and high absolute neutrophils at 15.8 x10E3/uL. Further, the glucose level is also high at 194 mg/dL, and high creatinine at 10.83 mg/dL, low sodium at 142 mmol/L, low potassium at 4.5 mmol/L, and high chloride at 106 mmol/L. Her total carbon dioxide level is low at 20 mmol/L, the calcium level is high at 9.3 mg/dL, the total protein is low at 6.8 g/dL, and the albumin is also low at 4.1 g/dL. Other normal readings are albumin \
-                   4.5 and GFR 69"
+            "content": "white blood cells=18.3 (high), red blood cells=14.44 (high), hemoglobin=113.7 (high), hematocrit=140.9% (high), MCV=192 (high), MCH=130.9 (high), MCHC=33.5 (low), RDW=112.9% (high), platelets=1304 (high), neutrophils=70% (high), lymphs=24% (low), monocytes=15% (high), eosinophils=10% (high), basophils=11% (high), absolute neutrophils=15.8 (high), glucose level=194 (high), creatinine=10.83 (high), sodium=142 (low), potassium=4.5 (low), chloride=106 (high), carbon dioxide=20 (low), calcium=9.3 (high), total protein=6.8 (low), albumin=4.1 (low). Other normal readings are albumin 4.5 and GFR 69"
         },
         {
             "role": "user",
